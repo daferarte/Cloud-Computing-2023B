@@ -1,0 +1,20 @@
+inicializar contenedores
+
+-- docker-compose up -d --build
+
+Bajar contenedores
+
+-- docker-compose down -v
+
+Redes
+
+#listar
+-- docker network ls 
+
+#inspeccionar
+
+--docker network inspect containername
+
+#ingresar a containername
+
+--docker exec -it container_name /bin/bash
