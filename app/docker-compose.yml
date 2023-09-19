@@ -1,11 +1,50 @@
 version: '3.7'
+
 services:
+  # Servicio de backend
   api:
-    build: .
+    build:
+      context: ./backend/
     networks:
       - backend
     ports:
       - "3000:3000"
+
+  # servicio de front 
+  front:
+    build:
+      context: ./fronted/
+    ports:
+      - 3001:3000
+    networks:
+      - backend
+  
+  # servicio de base de datos
+  db:
+    image: postgres
+    restart: always
+    ports:
+      - "54320:5432"
+    environment:
+      POSTGRES_PASSWORD: "12345"
+    volumes:
+      - ./data/almacenamiento_pg:/var/lib/postgresql/data
+    networks:
+      - backend
+
+  # gestion de datos
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: dani@dani.com
+      PGADMIN_DEFAULT_PASSWORD: "12345"
+    volumes:
+      - ./data/pgadmin-data:/var/lib/pgadmin
+    networks:
+      - backend
 
 networks:
   backend:

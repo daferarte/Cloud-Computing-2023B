@@ -4,7 +4,7 @@ RUN mkdir -p /usr/src/app
 
 WORKDIR /usr/src/app
 
-COPY ./backend/ .
+COPY ./app/ .
 
 RUN npm install
 
